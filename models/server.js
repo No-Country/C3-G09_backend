@@ -7,15 +7,28 @@ class Server {
         this.app = express();
         this.port = process.env.PORT_SERVER
         this.urlServer = process.env.URL_SERVER
+
+        //Middlewares
+        this.middlewares();
+
+        //Rutas de la app
         this.routes();
     }
+
+
+
+    // Middlewares
+
+    middlewares() {
+        //Configuracion del directorio publico
+        this.app.use( express.static(__dirname + 'public') );
+        
+    }
+
 
     //definimos las rutas
     routes() {
 
-        this.app.get('/', (req, res) => {
-            res.send('Hello ParkApp')
-        })
 
     }
 
