@@ -8,47 +8,57 @@ const dotenv = require("dotenv");
 const DBConnection = require("./config/DB");
 dotenv.config(); // Configuracion del .env
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
+// const indexRouter = require("./routes/index");
+// const usersRouter = require("./routes/users");
 
-const app = express();
+ const app = express();
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-//app.use(cors({ origin: allowedOrigins }));
+ app.get('/', function(req,res){
+   res.send('Hello ParkApp')
+  
+ })
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+ app.listen(process.env.PORT_SERVER,()=>{
+  console.log(`Server listening on ${process.env.URL_SERVER}:${process.env.PORT_SERVER}`)
+ })
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+// // view engine setup
+// app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "jade");
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+// app.use(logger("dev"));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(cookieParser());
+// app.use(express.static(path.join(__dirname, "public")));
+// //app.use(cors({ origin: allowedOrigins }));
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+// app.use("/", indexRouter);
+// app.use("/users", usersRouter);
 
-async function main() {
-  DBConnection(); // Llamado a la conexión con MongoDB
-  await app.listen(port);
-  console.log(`Server listening on ${server}:${port}`);
-}
+// // catch 404 and forward to error handler
+// app.use(function (req, res, next) {
+//   next(createError(404));
+// });
 
-main();
+// // error handler
+// app.use(function (err, req, res, next) {
+//   // set locals, only providing error in development
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-module.exports = app;
+//   // render the error page
+//   res.status(err.status || 500);
+//   res.render("error");
+// });
+
+// async function main() {
+//   //DBConnection(); // Llamado a la conexión con MongoDB
+//   await app.listen(process.env.PORT_SERVER);
+//   console.log(`Server listening on ${process.env.URL_SERVER}:${port}`);
+// }
+
+// main();
+
+// module.exports = app;
