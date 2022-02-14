@@ -1,27 +1,28 @@
 const createError = require("http-errors");
-const express = require("express");
+
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-const dotenv = require("dotenv");
+
 const DBConnection = require("./config/DB");
-dotenv.config(); // Configuracion del .env
+
+//Configuramos dotenv
+require('dotenv').config()
+
+//Server
+const Server = require('./models/server')
+const server = new Server()
+
+server.listen() //inicializacion del server
 
 // const indexRouter = require("./routes/index");
 // const usersRouter = require("./routes/users");
 
- const app = express();
 
 
- app.get('/', function(req,res){
-   res.send('Hello ParkApp')
-  
- })
-
- app.listen(process.env.PORT_SERVER,()=>{
-  console.log(`Server listening on ${process.env.URL_SERVER}:${process.env.PORT_SERVER}`)
- })
+ 
+ 
 
 // // view engine setup
 // app.set("views", path.join(__dirname, "views"));
