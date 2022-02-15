@@ -21,7 +21,7 @@ class Server {
 
     middlewares() {
         //Configuracion del directorio publico
-        this.app.use( express.static(__dirname + 'public') );
+        this.app.use( express.static('public') );
         
     }
 
