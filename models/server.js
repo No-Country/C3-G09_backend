@@ -1,5 +1,7 @@
 //WebServer express basado en clases
 const express = require("express");
+const cors = require('cors')
+const logger = require("morgan");
 
 class Server {
 
@@ -7,6 +9,7 @@ class Server {
         this.app = express();
         this.port = process.env.PORT_SERVER
         this.urlServer = process.env.URL_SERVER
+        this.userRoutesPath = '/api/users'
 
         //Middlewares
         this.middlewares();
@@ -20,6 +23,13 @@ class Server {
     // Middlewares
 
     middlewares() {
+        //Configuracion CORS
+        
+        this.app.use(cors())
+
+        //Morgan
+        this.app.use(logger("dev"));
+
         //Configuracion del directorio publico
         this.app.use( express.static('public') );
         
@@ -29,6 +39,8 @@ class Server {
     //definimos las rutas
     routes() {
 
+      //rutas de usuario
+      this.app.use(this.userRoutesPath, require('../routes/users'))
 
     }
 
