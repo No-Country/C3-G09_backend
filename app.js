@@ -1,28 +1,18 @@
 const createError = require("http-errors");
-
 const path = require("path");
 const cookieParser = require("cookie-parser");
-
-
-
-const DBConnection = require("./config/DB");
+const { createRoles } = require("./config/initialSetup");
 
 //Configuramos dotenv
-require('dotenv').config()
+require("dotenv").config();
+
+createRoles(); // Genera los roles la primer vez que se inicializa la app
 
 //Server
-const Server = require('./models/server')
-const server = new Server()
+const Server = require("./models/Server");
+const server = new Server();
 
-server.listen() //inicializacion del server
-
-// const indexRouter = require("./routes/index");
-// const usersRouter = require("./routes/users");
-
-
-// // view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "jade");
+server.listen(); //inicializacion del server
 
 // app.use(logger("dev"));
 // app.use(express.json());
@@ -55,7 +45,5 @@ server.listen() //inicializacion del server
 //   await app.listen(process.env.PORT_SERVER);
 //   console.log(`Server listening on ${process.env.URL_SERVER}:${port}`);
 // }
-
-// main();
 
 // module.exports = app;
