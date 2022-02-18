@@ -31,8 +31,13 @@ class Server {
     //Morgan
     this.app.use(logger("dev"));
 
+    //lectura de datos enviados en el body  de la peticion
+    this.app.use(express.json())
+
     //Configuracion del directorio publico
     this.app.use(express.static("public"));
+
+    
   }
 
   //definimos las rutas

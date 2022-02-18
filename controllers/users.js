@@ -8,9 +8,13 @@ const getUsers = (req, res = response) => {
 };
 
 const postUser = (req, res = response) => {
+//data enviada desde el cliente
+  const {name, edad} = req.body;
   res.json({
     ok: true,
-    msg: "POST request user",
+    msg:"usuario creado",
+    name,
+    edad
   });
 };
 
