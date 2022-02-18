@@ -8,17 +8,17 @@ const getUsers = (req, res = response) => {
 };
 
 const postUser = (req, res = response) => {
-//data enviada desde el cliente
-  const {name, edad} = req.body;
+   //data enviada desde el cliente
+   const {name, edad} = req.body;
   res.json({
     ok: true,
-    msg:"usuario creado",
-    name,
-    edad
+    msg: "POST request user",
+    name
   });
 };
 
 const deleteUser = (req, res = response) => {
+  
   res.json({
     ok: true,
     msg: "DELETE request user",
@@ -38,3 +38,4 @@ module.exports = {
   putUser,
   deleteUser,
 };
+
