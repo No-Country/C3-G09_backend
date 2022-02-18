@@ -21,9 +21,6 @@ server.listen(); //inicializacion del server
 // app.use(express.static(path.join(__dirname, "public")));
 // //app.use(cors({ origin: allowedOrigins }));
 
-// app.use("/", indexRouter);
-// app.use("/users", usersRouter);
-
 // // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
 //   next(createError(404));
@@ -39,11 +36,3 @@ server.listen(); //inicializacion del server
 //   res.status(err.status || 500);
 //   res.render("error");
 // });
-
-// async function main() {
-//   //DBConnection(); // Llamado a la conexión con MongoDB
-//   await app.listen(process.env.PORT_SERVER);
-//   console.log(`Server listening on ${process.env.URL_SERVER}:${port}`);
-// }
-
-// module.exports = app;
