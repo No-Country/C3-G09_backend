@@ -1,15 +1,17 @@
-
-const {Router} = require('express');
-const { getUsers, putUser, postUser,deleteUser } = require('../controllers/users');
+const { Router } = require("express");
 const router = Router();
+const {
+  getUsers,
+  getUserById,
+  updateUserById,
+  deleteUserById,
+} = require("../controllers/userController");
 
 // Rutas para usuarios http://localhost:4000/api/users/
 
-router.get('/', getUsers)
-router.post('/',postUser)
-router.put('/',putUser)
-router.delete('/',deleteUser)
-
-
+router.get("/", getUsers);
+router.get("/:usersId", getUserById);
+router.put("/:usersId", updateUserById);
+router.delete("/:usersId", deleteUserById);
 
 module.exports = router;
