@@ -10,6 +10,10 @@ class Server {
     this.port = process.env.PORT_SERVER;
     this.urlServer = process.env.URL_SERVER;
     this.userRoutesPath = "/api/users";
+    
+    
+    // DataBase
+    DBConnection();
 
     //Middlewares
     this.middlewares();
@@ -17,8 +21,6 @@ class Server {
     //Rutas de la app
     this.routes();
 
-    // DataBase
-    DBConnection();
   }
 
   // Middlewares
