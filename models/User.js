@@ -5,7 +5,7 @@ const userSchema = new Schema(
     username: {
       type: "string",
       unique: true,
-      require: true,
+      required: true,
       trim: true,
       min: 3,
       max: 255,
@@ -13,13 +13,13 @@ const userSchema = new Schema(
     password: {
       type: "string",
       trim: true,
-      require: true,
+      required: true,
       min: 6,
       max: 255,
     },
     email: {
       type: "string",
-      require: true,
+      required: true,
       trim: true,
       unique: true,
       min: 6,
@@ -27,7 +27,7 @@ const userSchema = new Schema(
     },
     name: {
       type: "string",
-      require: true,
+      required: true,
       trim: true,
     },
     surname: {
@@ -45,6 +45,9 @@ const userSchema = new Schema(
       require: true,
       trim: true,
     },
+    img:{
+      type: "string"
+    },
     roles: [
       {
         ref: "Role",
@@ -56,12 +59,17 @@ const userSchema = new Schema(
     },
     enabled: {
       type: "boolean",
-      default: false,
+      default: true,
     },
+    
     deleted: {
       type: "boolean",
       default: false,
     },
+    google: {
+      type: "boolean",
+      default: false,
+    }
   },
   {
     timestamps: true,
