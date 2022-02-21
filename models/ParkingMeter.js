@@ -3,9 +3,6 @@ const { Schema, model } = require("mongoose");
 const parkingMeterSchema = new Schema(
   {
   
-   
-   
- 
     address: {
       type: "string",
       require: true,

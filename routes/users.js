@@ -5,7 +5,7 @@ const {
   getUserById,
   updateUserById,
   deleteUserById,
-} = require("../controllers/userController");
+} = require("../controllers/usersController");
 
 // Rutas para usuarios http://localhost:4000/api/users/
 
