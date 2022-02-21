@@ -49,12 +49,31 @@ exports.deleteUserById = async (req, res) => {
   }
 };
 
-/* El post se haria en /auth/singUp
+/* El post se haria en /auth/singUp - por ahora lo dejo aca hasta que funcione bien la creacion de usuario*/
 
-const postUser = (req, res = response) => {
-  res.json({
-    ok: true,
-    msg: "POST request user",
-  });
+exports.postUser = async (req, res = response) => {
+  //data enviada desde el cliente
+  const body = req.body;
+
+  const user = new User(body);
+  await user.save()
+
+ res.json({
+   ok: true,
+   msg: "Usuario añadido a la bd",
+   user
+ });
 };
-*/
+
+
+
+// se puede crear un usuario muy basico sin validaciones por el momento 
+
+// {
+
+//   "name":"user2",
+//   "edad":34,
+//   "email":"parkapp2@gmail.com",
+//   "password":"parkpark",
+//   "username":"parker2"
+// }
