@@ -32,21 +32,21 @@ const userSchema = new Schema(
     },
     surname: {
       type: "string",
-      require: true,
+      required: true,
       trim: true,
     },
     birthYear: {
       type: "number",
-      require: true,
+      required: true,
       trim: true,
     },
     cel: {
       type: "string",
-      require: true,
+      required: true,
       trim: true,
     },
-    img:{
-      type: "string"
+    img: {
+      type: "string",
     },
     roles: [
       {
@@ -61,7 +61,6 @@ const userSchema = new Schema(
       type: "boolean",
       default: true,
     },
-    
     deleted: {
       type: "boolean",
       default: false,
@@ -69,12 +68,21 @@ const userSchema = new Schema(
     google: {
       type: "boolean",
       default: false,
-    }
+    },
   },
   {
     timestamps: true,
     versionkey: false,
   }
 );
+
+userSchema.statics.encryptPassword = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
+};
+
+userSchema.statics.comparePassword = async (password, receivedPassword) => {
+  return await bcrypt.compare(password, receivedPassword);
+};
 
 module.exports = model("User", userSchema);

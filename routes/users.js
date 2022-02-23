@@ -14,6 +14,6 @@ router.get("/", getUsers);
 router.get("/:usersId", getUserById);
 router.put("/:usersId", updateUserById);
 router.delete("/:usersId", deleteUserById);
-router.post("/",postUser); //despues mover esta ruta
+router.post("/", postUser); //despues mover esta ruta
 
 module.exports = router;

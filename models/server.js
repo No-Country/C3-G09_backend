@@ -10,8 +10,8 @@ class Server {
     this.port = process.env.PORT_SERVER;
     this.urlServer = process.env.URL_SERVER;
     this.userRoutesPath = "/api/users";
-    
-    
+    this.authRoutesPath = "/api/auth";
+
     // DataBase
     DBConnection();
 
@@ -20,7 +20,6 @@ class Server {
 
     //Rutas de la app
     this.routes();
-
   }
 
   // Middlewares
@@ -34,18 +33,18 @@ class Server {
     this.app.use(logger("dev"));
 
     //lectura de datos enviados en el body  de la peticion
-    this.app.use(express.json())
+    this.app.use(express.json());
 
     //Configuracion del directorio publico
     this.app.use(express.static("public"));
-
-    
   }
 
   //definimos las rutas
   routes() {
     //rutas de usuario
     this.app.use(this.userRoutesPath, require("../routes/users"));
+
+    this.app.use(this.authRoutesPath, require("../routes/auth"));
   }
 
   listen() {
