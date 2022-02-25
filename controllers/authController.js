@@ -3,7 +3,7 @@ const Role = require("../models/Role");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const privateKey = fs.readFileSync("./keys/private.pem");
-const { sendEmail } = require("../services/nodemailer");
+const { sendEmail } = require("../service/nodemailer");
 const { v4: uuid } = require("uuid");
 const jwtOptions = { algorithm: "RS256", expiresIn: "1h" };
 
@@ -25,7 +25,7 @@ exports.signUp = async (req, res) => {
       cel,
       uuidEmail: uid,
     });
-    console.log("newUser", newUser);
+   console.log("newUser", newUser);
     if (roles) {
       // Busco el id de los roles asignado, si no lo encuentra uso User por defecto
       const foundRoles = await Role.find({ name: { $in: roles } });
@@ -40,7 +40,7 @@ exports.signUp = async (req, res) => {
       body: `  ` /* ACÁ VA EL HTML DEL MAIL PARA LA VALIDACIÓN */,
     });
 
-    await newUser.save(); // Guardo el usuario en la DB
+   await newUser.save(); // Guardo el usuario en la DB
 
     const payload = {
       id: newUser._id,

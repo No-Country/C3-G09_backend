@@ -1,15 +1,17 @@
 const { Router } = require("express");
 const router = Router();
-/*const {
+const {
   signUp,
   signIn,
   verify,
   verified,
 } = require("../controllers/authController");
 
-Router.post("/signin", signIn);
-Router.post("/signup", signUp);
-Router.get("/verify/:uid", verify);
-Router.get("/verified", verified);
-*/
+
+
+router.post("/signin", signIn);
+router.post("/signup", signUp);
+router.get("/verify/:uid", verify);
+router.get("/verified", verified);
+
 module.exports = router;
