@@ -8,53 +8,52 @@ const { v4: uuid } = require("uuid");
 const jwtOptions = { algorithm: "RS256", expiresIn: "1h" };
 
 exports.signUp = async (req, res) => {
+
+  
   try {
-    const { username, password, email, roles, name, surname, birthYear, cel } =
-      /* HAY QUE VER QUE TRAEMOS DEL FRONT */
-      req.body;
+    const { username, password, email, roles, name, surname, birthYear, cel } = req.body;
 
-    const uid = uuid();
+   const uid = uuid();
 
-    const newUser = new User({
+      
+       const newUser = new User({
       username,
-      password: await User.encryptPassword(password),
+      password :await User.encryptPassword(password),
       email,
+      roles,
       name,
       surname,
       birthYear,
       cel,
       uuidEmail: uid,
     });
-   console.log("newUser", newUser);
-    if (roles) {
-      // Busco el id de los roles asignado, si no lo encuentra uso User por defecto
-      const foundRoles = await Role.find({ name: { $in: roles } });
-      newUser.roles = foundRoles.map((role) => role._id);
-    } else {
-      const role = await Role.findOne({ name: "user" });
-      newUser.roles = [role._id];
-    }
 
-    await sendEmail({
-      email: email,
-      body: `  ` /* ACÁ VA EL HTML DEL MAIL PARA LA VALIDACIÓN */,
-    });
+  console.log("newUser", newUser);
+    //la validacion del rol la muevo a los middlewares 
 
-   await newUser.save(); // Guardo el usuario en la DB
+    // await sendEmail({
+    //   email: email,
+    //   body: `  ` /* ACÁ VA EL HTML DEL MAIL PARA LA VALIDACIÓN */,
+    // });
 
-    const payload = {
-      id: newUser._id,
-      username: newUser.username,
-      roles: newUser.roles,
-    };
+    await newUser.save(); // Guardo el usuario en la DB
 
-    const token = jwt.sign(payload, privateKey, jwtOptions); // Genero el token
+    // const payload = {
+    //   id: newUser._id,
+    //   username: newUser.username,
+    //   roles: newUser.roles,
+    // };
+
+   // const token = jwt.sign(payload, privateKey, jwtOptions); // Genero el token
 
     res
       .status(200)
-      .json({ JWT: token, data: payload, message: "User saved successfully" });
+      .json({ /*JWT: token, data: payload,*/ message: "User saved successfully" });
   } catch (error) {
-    res.status(400).json({ error: error });
+    res.status(500).json({
+      error:"Error Grave contactarse con el admin"
+    });
+    console.log(error)
   }
 };
 

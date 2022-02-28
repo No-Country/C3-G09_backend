@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-
+const bcryptjs = require('bcryptjs')
 const userSchema = new Schema(
   {
     username: {
@@ -48,12 +48,11 @@ const userSchema = new Schema(
     img: {
       type: "string",
     },
-    roles: [
+    roles: 
       {
-        ref: "Role",
-        type: Schema.Types.ObjectId, //Relacion entre el Schema de roles y el de Users
+        type:"string"//ahora lo trae de la base de datos
       },
-    ],
+    
     uuidEmail: {
       type: "string",
     },
@@ -77,12 +76,12 @@ const userSchema = new Schema(
 );
 
 userSchema.statics.encryptPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password, salt);
+  const salt = await bcryptjs.genSaltSync(10);
+  return await bcryptjs.hashSync(password, salt);
 };
 
 userSchema.statics.comparePassword = async (password, receivedPassword) => {
-  return await bcrypt.compare(password, receivedPassword);
+  return await bcryptjs.compare(password, receivedPassword);
 };
 
 module.exports = model("User", userSchema);
