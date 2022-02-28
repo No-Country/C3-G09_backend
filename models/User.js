@@ -84,4 +84,11 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
   return await bcryptjs.compare(password, receivedPassword);
 };
 
+//
+userSchema.methods.toJSON = function (){
+  const {__v,password,...user} = this.toObject()
+  //saco los campos q no quiero mostrar en la response
+  return user
+
+}
 module.exports = model("User", userSchema);
