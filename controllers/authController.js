@@ -8,17 +8,15 @@ const { v4: uuid } = require("uuid");
 const jwtOptions = { algorithm: "RS256", expiresIn: "1h" };
 
 exports.signUp = async (req, res) => {
-
-  
   try {
-    const { username, password, email, roles, name, surname, birthYear, cel } = req.body;
+    const { username, password, email, roles, name, surname, birthYear, cel } =
+      req.body;
 
-   const uid = uuid();
+    const uid = uuid();
 
-      
-       const newUser = new User({
+    const newUser = new User({
       username,
-      password :await User.encryptPassword(password),
+      password: await User.encryptPassword(password),
       email,
       roles,
       name,
@@ -28,8 +26,8 @@ exports.signUp = async (req, res) => {
       uuidEmail: uid,
     });
 
-  console.log("newUser", newUser);
-    //la validacion del rol la muevo a los middlewares 
+    console.log("newUser", newUser);
+    //la validacion del rol la muevo a los middlewares
 
     // await sendEmail({
     //   email: email,
@@ -38,22 +36,22 @@ exports.signUp = async (req, res) => {
 
     await newUser.save(); // Guardo el usuario en la DB
 
-    // const payload = {
-    //   id: newUser._id,
-    //   username: newUser.username,
-    //   roles: newUser.roles,
-    // };
+    const payload = {
+      id: newUser._id,
+      username: newUser.username,
+      roles: newUser.roles,
+    };
 
-   // const token = jwt.sign(payload, privateKey, jwtOptions); // Genero el token
+    const token = jwt.sign(payload, privateKey, jwtOptions); // Genero el token
 
     res
       .status(200)
-      .json({ /*JWT: token, data: payload,*/ message: "User saved successfully" });
+      .json({ JWT: token, data: payload, message: "User saved successfully" });
   } catch (error) {
     res.status(500).json({
-      error:"Error Grave contactarse con el admin"
+      error: "Error Grave contactarse con el admin",
     });
-    console.log(error)
+    console.log(error);
   }
 };
 
