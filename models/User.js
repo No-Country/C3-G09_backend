@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const bcryptjs = require('bcryptjs')
+const bcryptjs = require("bcryptjs");
 const userSchema = new Schema(
   {
     username: {
@@ -48,11 +48,9 @@ const userSchema = new Schema(
     img: {
       type: "string",
     },
-    roles: 
-      {
-        type:"string"//ahora lo trae de la base de datos
-      },
-    
+    roles: {
+      type: "string", //ahora lo trae de la base de datos
+    },
     uuidEmail: {
       type: "string",
     },
@@ -85,10 +83,9 @@ userSchema.statics.comparePassword = async (password, receivedPassword) => {
 };
 
 //
-userSchema.methods.toJSON = function (){
-  const {__v,password,...user} = this.toObject()
+userSchema.methods.toJSON = function () {
+  const { __v, password, ...user } = this.toObject();
   //saco los campos q no quiero mostrar en la response
-  return user
-
-}
+  return user;
+};
 module.exports = model("User", userSchema);

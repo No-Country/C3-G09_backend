@@ -11,6 +11,7 @@ class Server {
     this.urlServer = process.env.URL_SERVER;
     this.userRoutesPath = "/api/users";
     this.authRoutesPath = "/api/auth";
+    this.paymentsRoutesPath = "/api/payments";
 
     // DataBase
     DBConnection();
@@ -44,7 +45,11 @@ class Server {
     //rutas de usuario
     this.app.use(this.userRoutesPath, require("../routes/users"));
 
+    //rutas de auth
     this.app.use(this.authRoutesPath, require("../routes/auth"));
+
+    //rutas de payments
+    this.app.use(this.paymentsRoutesPath, require("../routes/payments"));
   }
 
   listen() {
