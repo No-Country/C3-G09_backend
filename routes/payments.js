@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { preferences, view } = require("../Controllers/paymentsController");
+const { preferences, view } = require("../controllers/paymentsController");
 const router = Router();
 
 router.get("/", view);
