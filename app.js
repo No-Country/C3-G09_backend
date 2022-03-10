@@ -6,7 +6,7 @@ require("dotenv").config();
 createRoles(); // Genera los roles la primer vez que se inicializa la app
 
 //Server
-const Server = require("./models/Server");
+const Server = require("./models/server");
 const server = new Server();
 
 server.listen(); //inicializacion del server
