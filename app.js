@@ -1,4 +1,4 @@
-const { createRoles } = require("./config/initialSetup");
+const { createRoles } = require("./config/InitialSetup.js");
 
 //Configuramos dotenv
 require("dotenv").config();
