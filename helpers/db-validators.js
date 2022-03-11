@@ -12,14 +12,15 @@ exports.isAValidRol = async(rol='') =>{
   exports.isAValidEmail = async(email='') =>{
     const emailExists = await User.findOne({email})
     if(emailExists){
-      throw new Error(`el email ya esta registrado`)
+        throw new Error(`el email ya esta registrado`)
     }
   }
 
   
   exports.isAValidUsername= async(username='') =>{
     const usernameExists = await User.findOne({username})
-    if(username){
+    
+    if(usernameExists){
       throw new Error(`el nombre de usuario ya esta registrado`)
     }
   }
