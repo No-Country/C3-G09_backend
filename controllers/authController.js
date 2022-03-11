@@ -502,5 +502,5 @@ exports.verify = async (req, res) => {
 };
 
 exports.verified = (req, res) => {
-  res.status(200).json({ message: "Verified route" });
+  res.status(200).redirect(`${process.env.URL_FRONT}`);
 };
